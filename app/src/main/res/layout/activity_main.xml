@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -60,73 +61,117 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout_quantidade"
+            android:layout_below="@id/linearLayout_numbers">
+
+            <EditText
+                android:id="@+id/edtQuantidade"
+                android:layout_width="143dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="@string/edt_quantidade"
+                android:inputType="number"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/buttonReset"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.66"
+                android:text="@string/reset" />
+        </LinearLayout>
+
+        <LinearLayout
 
             android:id="@+id/linearLayout_options"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignTop="@+id/linearLayout_numbers"
+            android:layout_alignTop="@+id/linearLayout_quantidade"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp">
 
             <android.support.v7.widget.SwitchCompat
-                android:text="@string/withoutRepetition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/switchRepetition"
-                />
-
-            <Button
-                android:text="@string/reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/buttonReset"
-                android:layout_weight="1"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+                android:text="@string/withoutRepetition" />
+
         </LinearLayout>
 
         <TextView
-            android:focusable="false"
             android:id="@+id/textViewDrawn"
-            android:textSize="50sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_below="@+id/linearLayout_options"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:focusable="false"
+            android:textSize="50sp"
+            android:visibility="invisible" />
 
         <Button
-            android:layout_marginTop="20dp"
             android:id="@+id/buttonDoRaffle"
             android:text="@string/raffe"
             android:textSize="20sp"
-            android:layout_below="@id/textViewDrawn"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_below="@+id/linearLayout_options"
+            android:layout_centerHorizontal="true" />
+
         <TextView
-            android:layout_marginTop="50dp"
-            android:focusable="false"
             android:id="@+id/textViewSorteados"
-            android:text="Sorteados"
-            android:layout_below="@id/buttonDoRaffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            />
-        <ScrollView
+            android:layout_marginTop="48dp"
             android:focusable="false"
-            android:layout_below="@+id/textViewSorteados"
+            android:text="Sorteados"
+            android:textSize="20sp"
+            android:layout_below="@+id/buttonDoRaffle"
+            android:layout_alignParentStart="true" />
+
+        <ScrollView
+            android:id="@+id/scrollView3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView3">
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewSorteados"
+            android:focusable="false">
+
             <TextView
-                android:focusable="false"
                 android:id="@+id/textViewDrawnNumbers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"/>
+                android:focusable="false"
+                android:textSize="20sp" />
         </ScrollView>
+
+
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.gms.ads.AdView
+
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id">
+        </com.google.android.gms.ads.AdView>
+    </LinearLayout>
+
+
 </RelativeLayout>

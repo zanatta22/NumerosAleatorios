@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "921566257024",
+    "firebase_url": "https://numerosaleatorios-e4318.firebaseio.com",
+    "project_id": "numerosaleatorios-e4318",
+    "storage_bucket": "numerosaleatorios-e4318.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921566257024:android:261fcc4cb3de75fa",
+        "android_client_info": {
+          "package_name": "com.zanatta.guilherme.numerosaleatorios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921566257024-kqd345j8kfbl2hsqidea1ms5b0cglirl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh44J3RYXxfqP-fz7OSqEmF85RLdXKfrE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,44 +7,59 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText mEditTextMinNumber, mEditTextMaxNumber;
+    private EditText mEditTextMinNumber, mEditTextMaxNumber, mEditTextQuantidade;
     private TextView mTextViewDrawn, mTextViewDrawnNumbers;
     private Button mButtonDoRaffle, mButtonReset;
     private Random mRandom;
     private SwitchCompat mSwtich;
     private ArrayList<Integer> mList;
+    private ArrayList<Integer> mTeste;
     private int number;
     static final String LIST = "ListNumber";
     static final String NUMBER = "lastNumber";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
         mEditTextMinNumber = (EditText) findViewById(R.id.editTextMinNumber);
         mEditTextMaxNumber = (EditText) findViewById(R.id.editTextMaxNumber);
+        mEditTextQuantidade = (EditText)findViewById(R.id.edtQuantidade);
         mTextViewDrawn = (TextView) findViewById(R.id.textViewDrawn);
         mTextViewDrawnNumbers = (TextView) findViewById(R.id.textViewDrawnNumbers);
         mButtonDoRaffle = (Button) findViewById(R.id.buttonDoRaffle);
         mButtonReset = (Button) findViewById(R.id.buttonReset);
         mRandom = new Random();
         mSwtich = (SwitchCompat) findViewById(R.id.switchRepetition);
+
+
 
 
         if(savedInstanceState != null) {
@@ -97,11 +112,24 @@ public class MainActivity extends AppCompatActivity {
                         InputMethodManager.HIDE_NOT_ALWAYS);
             }
         });
+
+        mEditTextQuantidade.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    mEditTextQuantidade.setText("");
+                }
+                return false;
+            }
+        });
     }
 
     protected void buttonRaffleClicked(){
         mEditTextMaxNumber.clearFocus();
         mEditTextMinNumber.clearFocus();
+        mEditTextQuantidade.clearFocus();
         try {
             doRaffle(Integer.parseInt(mEditTextMinNumber.getText().toString()), Integer.parseInt(mEditTextMaxNumber.getText().toString()));
         }catch (NumberFormatException e){
@@ -181,6 +209,8 @@ public class MainActivity extends AppCompatActivity {
     protected void reset(){
         mEditTextMaxNumber.clearFocus();
         mEditTextMinNumber.clearFocus();
+        mEditTextQuantidade.clearFocus();
+        mEditTextQuantidade.setText("");
         mEditTextMinNumber.setText("");
         mEditTextMaxNumber.setText("");
         mList.clear();
@@ -190,27 +220,45 @@ public class MainActivity extends AppCompatActivity {
 
     protected void doRaffle(int min, int max){
         if(mSwtich.isChecked()) {
-            do {
-                number = mRandom.nextInt((max - min) + 1) + min;
-                if (mList.size() == (max - min) + 1) {
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setMessage(R.string.allNumbers)
-                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+            for (int i = 0; i < Integer.parseInt(mEditTextQuantidade.getText().toString()); i++) {
+                do {
 
-                                }
-                            })
-                            .show();
-                    return;
-                }
-            } while (mList.contains(number));
-        }
+                    number = mRandom.nextInt((max - min) + 1) + min;
+
+                    if (mList.size() == (max - min) + 1) {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setMessage(R.string.allNumbers)
+                                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+
+
+                } while (mList.contains(number));
+
+
+                mList.add(0, number);
+                Collections.sort(mList);
+                mTextViewDrawn.setText("" + number);
+                mTextViewDrawnNumbers.setText(Arrays.toString(mList.toArray()));
+            }
+    }
         else
-            number = mRandom.nextInt((max - min) + 1) + min;
-        mList.add(0, number);
-        mTextViewDrawn.setText("" + number);
-        mTextViewDrawnNumbers.setText(Arrays.toString(mList.toArray()));
+                for (int i = 0; i < Integer.parseInt(mEditTextQuantidade.getText().toString()); i++) {
+                    number = mRandom.nextInt((max - min) + 1) + min;
+                    mList.add(0, number);
+                    Collections.sort(mList);
+                    mTextViewDrawn.setText("" + number);
+                    mTextViewDrawnNumbers.setText(Arrays.toString(mList.toArray()));
+                }
+
+
+
     }
 
     @Override
@@ -220,5 +268,7 @@ public class MainActivity extends AppCompatActivity {
             savedInstanceState.putInt(NUMBER,mList.get(0));
         super.onSaveInstanceState(savedInstanceState);
     }
+
+
 
 }
