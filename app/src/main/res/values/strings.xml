@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="allNumbers">Todos os números possíveis já foram sorteados</string>
-    <string name="drawn">Sorteados</string>
+    <string name="drawn">Números Sorteados</string>
     <string name="maxNumber">Número Final</string>
-    <string name="app_name">Números Aleatórios</string>
+    <string name="app_name">Sorte.My</string>
     <string name="minNumber">Numero Inicial</string>
     <string name="noInferiorLimit">Insira um número final</string>
     <string name="noLimits">Insira um numero inicial e um final</string>
     <string name="noSuperiorLimit">Insira um número final</string>
-    <string name="raffe">Gerar</string>
-    <string name="reset">Zerar dados</string>
+    <string name="raffe">Sortear</string>
+    <string name="reset">Limpar Campos</string>
     <string name="withoutRepetition">Sem Repetição</string>
     <string name="edt_quantidade">Quantidade</string>
-    <string name="banner_ad_unit_id">ca-app-pub-1647459078113380/3056036584</string>
+
+   <string name="banner_ad_unit_id">ca-app-pub-1647459078113380/3056036584</string>
 </resources>
